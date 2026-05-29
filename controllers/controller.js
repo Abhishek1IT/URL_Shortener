@@ -10,6 +10,8 @@ export const createShortUrl = async (req, res) => {
     }
 
     const shortUrl = generateShortUrl();
+    
+    const shortCode = generateShortUrl();
 
     const newUrl = new Url({
       originalUrl,

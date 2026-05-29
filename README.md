@@ -56,10 +56,9 @@ Open `frontend/index.html` in your browser. You can also use VS Code Live Server
 The frontend sends requests to `http://localhost:5000`, so make sure the backend is running before you try to shorten a URL.
 
 1. Start MongoDB
-2. Run the backend from the `backend/` folder
+2. Run the backend from the project root
 3. Open `frontend/index.html`
 4. Paste a URL and click the shorten button
-
 ## API Endpoints
 
 ### POST `/shorten`

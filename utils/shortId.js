@@ -2,7 +2,7 @@ function generateShortUrl() {
 
     let result = '';
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 6; i++) {
         
         const category = Math.floor(Math.random() * 3)+1;
 
