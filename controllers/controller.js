@@ -1,7 +1,7 @@
 import generateShortUrl from "../utils/shortId.js";
 import Url from "../models/url.js";
 
-export const createShortUrl = async (req, res) => {
+const createShortUrl = async (req, res) => {
   try {
     const { originalUrl } = req.body;
 
@@ -10,7 +10,7 @@ export const createShortUrl = async (req, res) => {
     }
 
     const shortUrl = generateShortUrl();
-    
+
     const shortCode = generateShortUrl();
 
     const newUrl = new Url({
@@ -18,7 +18,7 @@ export const createShortUrl = async (req, res) => {
       shortUrl,
     });
 
-    await newUrl.save();
+    const saved = await newUrl.save();
 
     res.status(201).json({ shortUrl });
   } catch (error) {
@@ -27,7 +27,7 @@ export const createShortUrl = async (req, res) => {
   }
 };
 
-export const redirectToOriginalUrl = async (req, res) => {
+const redirectToOriginalUrl = async (req, res) => {
   try {
     const { shortUrl } = req.params;
 
@@ -45,3 +45,52 @@ export const redirectToOriginalUrl = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+const updateShortUrl = async (req, res) => {
+  try {
+    const { shortUrl } = req.params;
+
+    const { originalUrl } = req.body;
+
+    if (!originalUrl) {
+      return res.status(400).json({ error: "Original URL is required" });
+    }
+
+    const urlEntry = await Url.findOneAndUpdate(
+      { shortUrl },
+      { originalUrl },
+      { new: true },
+    );
+
+    if (!urlEntry) {
+      return res.status(404).json({ error: "Short URL not found" });
+    }
+
+    res.json({
+      shortUrl: urlEntry.shortUrl,
+      originalUrl: urlEntry.originalUrl,
+    });
+  } catch (error) {
+    console.error("Error updating short URL:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const deleteShortUrl = async (req, res) => {
+  try {
+    const { shortUrl } = req.params;
+
+    const urlEntry = await Url.findOneAndDelete({ shortUrl });
+
+    if (!urlEntry) {
+      return res.status(404).json({ error: "Short URL not found" });
+    }
+
+    res.json({ message: "Short URL deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting short URL:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export { createShortUrl, redirectToOriginalUrl, updateShortUrl, deleteShortUrl };

@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL_Shortener</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
 
-        <h1>URL Shortener</h1>
+        <h1 class="title">URL Shortener</h1>
 
-        <input type="text" id="url-input" placeholder="Enter your URL here">
+        <div class="form-group">
+            <label for="url-input" class="sr-only">Original URL</label>
+            <input type="text" id="url-input" placeholder="Enter your URL here" aria-label="Original URL">
+            <button id="shorten-btn" class="primary">Shorten URL</button>
+        </div>
 
-        <button id="shorten-btn">Shorten URL</button>
+        <div id="result" class="result" aria-live="polite">
+            <div id="result-content"></div>
+            <div id="result-actions" class="result-actions">
+                <button id="update-btn" class="action-btn">Update URL</button>
+                <button id="delete-btn" class="action-btn danger">Delete URL</button>
+            </div>
+        </div>
 
-        <div id="result"></div>
-        
     </div>
 
     <script src="script.js"></script>

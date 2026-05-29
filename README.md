@@ -91,6 +91,45 @@ Example:
 http://localhost:5000/abc123XYZ9
 ```
 
+### PUT `/:shortUrl`
+
+Updates the original URL for an existing short URL.
+
+Request body:
+
+```json
+{
+  "originalUrl": "https://new-example.com"
+}
+```
+
+Response:
+
+```json
+{
+  "shortUrl": "abc123XYZ9",
+  "originalUrl": "https://new-example.com"
+}
+```
+
+### DELETE `/:shortUrl`
+
+Deletes an existing short URL.
+
+Example:
+
+```text
+DELETE http://localhost:5000/abc123XYZ9
+```
+
+Response:
+
+```json
+{
+  "message": "Short URL deleted successfully"
+}
+```
+
 ## Postman Test
 
 1. Set method to `POST`
