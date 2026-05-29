@@ -99,3 +99,7 @@ You should get back a `shortUrl` value.
 ## Notes
 
 - Make sure MongoDB is running before starting the server.
+
+## Author
+
+- Abhishek Kumar Gupta
